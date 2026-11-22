@@ -16,12 +16,10 @@ html {
     'Segoe UI',
     Roboto,
     sans-serif;
-  color: #1c1c1c;
 }
 
 body {
   min-height: 100vh;
-  background-color: #fafafa;
 }
 
 img,
