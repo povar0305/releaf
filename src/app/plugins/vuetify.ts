@@ -3,8 +3,10 @@ import { aliases, mdi } from 'vuetify/iconsets/mdi'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 
+export const fontFamily = "'Onest Variable', Onest, Inter, system-ui, sans-serif"
+
 // Цвета из палитры проекта
-const colors = {
+export const colors = {
   pine: '#1F4D24',
   grass: '#3A8F3E',
   leaf: '#2F7D35',

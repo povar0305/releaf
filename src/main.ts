@@ -1,4 +1,5 @@
 import './app/styles/index.css'
+import '@fontsource-variable/onest'
 import 'vuetify/styles'
 import '@mdi/font/css/materialdesignicons.css'
 
