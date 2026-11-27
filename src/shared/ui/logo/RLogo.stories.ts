@@ -36,6 +36,43 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
+export const Playground: Story = {
+  name: 'Playground',
+  args: {
+    variant: LogoVariant.Default,
+    layout: LogoLayout.Horizontal,
+    color: colors.grass,
+    label: 'releaf',
+    brand: true,
+  },
+  parameters: {
+    docs: {
+      source: {
+        type: 'code',
+        code: `<RLogo
+  variant="default"
+  layout="horizontal"
+  color="#3A8F3E"
+  label="releaf"
+  brand
+/>`,
+        language: 'html',
+      },
+    },
+  },
+  render: (args) => ({
+    components: { RLogo },
+    setup() {
+      return { args }
+    },
+    template: `
+      <div style="display: flex; align-items: center; justify-content: center; padding: 40px; background: #D6D6CC; box-sizing: border-box; width: 100%; height: 100%;">
+        <RLogo v-bind="args" />
+      </div>
+    `,
+  }),
+}
+
 
 export const AllColors: Story = {
   name: 'All Colors',
