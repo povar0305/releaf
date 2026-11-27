@@ -4,16 +4,22 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "icons:generate": "node scripts/generate-icons.mjs",
+    "predev": "npm run icons:generate",
     "dev": "vite",
+    "prebuild": "npm run icons:generate",
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
     "build-only": "vite build",
+    "pretype-check": "npm run icons:generate",
     "type-check": "vue-tsc --build",
     "lint": "run-s \"lint:*\"",
     "lint:oxlint": "oxlint . --fix",
     "lint:eslint": "eslint . --fix --cache",
     "format": "prettier --write --experimental-cli src/",
+    "prestorybook": "npm run icons:generate",
     "storybook": "storybook dev -p 6006",
+    "prebuild-storybook": "npm run icons:generate",
     "build-storybook": "storybook build"
   },
   "dependencies": {
