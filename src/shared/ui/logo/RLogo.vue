@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import {computed, type PropType} from 'vue'
-import {type LogoLayoutType, LogoVariant, type LogoVariantType} from './types'
+import { computed, type PropType } from 'vue'
+import { LogoLayout, type LogoLayoutType, LogoVariant, type LogoVariantType } from './types'
 import { colors } from '@/app/plugins/vuetify'
-
 
 const props = defineProps({
   variant: {
@@ -13,21 +12,17 @@ const props = defineProps({
     type: String,
     default: colors.grass,
   },
-  showBrand: {
-    type: Boolean,
-    default: false,
-  },
   layout: {
     type: String as PropType<LogoLayoutType>,
-    default: 'horizontal',
+    default: LogoLayout.Horizontal,
   },
   label: {
     type: String,
-    default: 'Releaf logo',
+    default: 'releaf',
   },
-  size: {
-    type: Number,
-    default: 120,
+  brand: {
+    type: Boolean,
+    default: false,
   },
 })
 
@@ -52,46 +47,40 @@ const svgMarkup = computed(() => {
     return `<path${attrs} fill="${props.color}"/>`
   })
 })
+
+const brandStyle = computed(() => ({
+  color: props.color === colors.white ? colors.white : colors.pine,
+}))
 </script>
 
 <template>
   <div
     class="r-logo"
-    :class="[
-      `r-logo--${props.variant}`,
-      { 'r-logo--horizontal': props.layout === 'horizontal' },
-      { 'r-logo--stacked': props.layout === 'bottom' },
-    ]"
-    :style="{ width: props.size ? `${props.size}px` : undefined , height: props.size ? `${props.size}px` : undefined ,}"
     role="img"
-    :aria-label="showBrand ? `Releaf logo - ${props.variant}` : props.label"
+    :data-variant="props.variant"
+    :data-layout="props.layout"
   >
     <span
+      v-show="props.layout !== LogoLayout.Wordmark"
       class="r-logo__icon"
-      :style="{ width: props.size ? `${props.size}px` : undefined , height: props.size ? `${props.size}px` : undefined ,}"
-
       v-html="svgMarkup"
     />
+
     <span
-      v-if="showBrand"
+      v-show="props.brand"
       class="r-logo__brand"
+      :style="brandStyle"
     >
-      Releaf
+      {{ props.label }}
     </span>
   </div>
 </template>
 
 <style scoped>
 .r-logo {
-  display: inline-flex;
-  align-items: center;
+  display: flex;
   gap: 8px;
-  line-height: 0;
-}
-
-.r-logo--stacked {
-  flex-direction: column;
-  align-items: flex-start;
+  width: fit-content;
 }
 
 .r-logo__icon {
@@ -109,9 +98,44 @@ const svgMarkup = computed(() => {
     Inter,
     system-ui,
     sans-serif;
-  font-weight: 600;
-  font-size: 0.875em;
-  color: currentColor;
+  font-weight: 700;
+  font-size: 74px;
   letter-spacing: 0.02em;
+}
+
+.r-logo[data-layout='horizontal'] {
+  flex-direction: row;
+  align-items: center;
+  gap: 40px;
+
+  .r-logo__brand {
+    padding-top: 13px;
+  }
+
+  .r-logo__icon {
+    width: 153px;
+    height: 153px;
+  }
+}
+
+.r-logo[data-layout='vertical'] {
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+
+  .r-logo__brand {
+    font-size: 63px;
+  }
+
+  .r-logo__icon {
+    width: 182px;
+    height: 182px;
+  }
+}
+
+.r-logo[data-layout='wordmark'] {
+  .r-logo__brand {
+    font-size: 85px;
+  }
 }
 </style>

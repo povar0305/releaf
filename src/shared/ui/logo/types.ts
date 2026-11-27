@@ -13,7 +13,8 @@ export type LogoVariantType = typeof LogoVariant[keyof typeof LogoVariant]
 
 export const LogoLayout = {
   Horizontal: 'horizontal',
-  Bottom: 'bottom',
+  Vertical: 'vertical',
+  Wordmark: 'wordmark',
 } as const
 
 export type LogoLayoutType = typeof LogoLayout[keyof typeof LogoLayout]
