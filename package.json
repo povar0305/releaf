@@ -17,6 +17,7 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@fontsource-variable/onest": "^5.3.1",
     "@mdi/font": "^7.4.47",
     "@tailwindcss/vite": "^4.3.5",
     "@tanstack/vue-query": "^5.108.2",
